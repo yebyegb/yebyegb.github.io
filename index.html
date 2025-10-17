@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>融城汇 - 人机交互项目</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary-color: #3498db;
+    --primary-color-dark: #2980b9;
+    --dark-color: #2c3e50;
+    --light-color: #fdfdfd;
+    --grey-color: #f7f9fc;
+    --text-color: #34495e;
+    --shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* --- 全局样式 --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    line-height: 1.8;
+    color: var(--text-color);
+    background-color: var(--grey-color);
+    scroll-behavior: smooth;
+}
+
+/* --- 容器样式 --- */
+.container {
+    max-width: 1100px;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 30px;
+}
+
+/* --- 头部与导航栏 --- */
+header {
+    background: var(--dark-color);
+    color: #fff;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+nav ul {
+    padding: 0;
+    list-style: none;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-left: 25px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 400;
+    transition: color 0.3s ease;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--primary-color);
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* --- 内容区块样式 --- */
+section {
+    padding: 80px 0;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: var(--light-color);
+}
+
+section:nth-of-type(even) {
+    background-color: var(--grey-color);
+}
+
+section h2 {
+    text-align: center;
+    margin-bottom: 60px;
+    font-size: 2.8rem;
+    color: var(--dark-color);
+    font-weight: 700;
+}
+
+section h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-top: 40px;
+    margin-bottom: 20px;
+    border-left: 5px solid var(--primary-color);
+    padding-left: 15px;
+    font-weight: 600;
+}
+
+/* --- 特定区块样式 --- */
+#home {
+    background-image: linear-gradient(to right, var(--primary-color), var(--primary-color-dark));
+    color: #fff;
+    text-align: center;
+    padding: 120px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+
+#home h1 {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+#home p {
+    font-size: 1.3rem;
+    max-width: 800px;
+    margin: 0 auto 30px;
+    font-weight: 300;
+}
+
+.btn {
+    display: inline-block;
+    background: #ffffff;
+    color: var(--primary-color-dark);
+    padding: 12px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.btn:hover {
+    background: var(--grey-color);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    text-align: left;
+}
+
+.team-member {
+    background: var(--light-color);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-member:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.team-member h3 {
+    margin-top: 0;
+    color: var(--dark-color);
+    font-size: 1.4rem;
+    border-left: none;
+    padding-left: 0;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+.team-member p {
+    font-size: 0.95rem;
+}
+
+#proposal strong {
+    color: var(--dark-color);
+    font-weight: 600;
+}
+
+#proposal ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+#proposal li {
+    padding-left: 30px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+#proposal li::before {
+    content: '✔';
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+    font-weight: 900;
+}
+
+/* --- 问卷样式 --- */
+.question-block {
+    background: #ffffff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.question-block h4 {
+    font-size: 1.25rem;
+    margin-top: 0;
+    color: var(--dark-color);
+    font-weight: 600;
+}
+
+.question-block .meta {
+    font-size: 0.9rem;
+    color: #888;
+    margin-left: 10px;
+    font-weight: 400;
+}
+
+.question-block ul {
+    list-style-type: none;
+    padding-left: 10px;
+    margin-top: 15px;
+}
+
+.question-block li {
+    margin-bottom: 8px;
+}
+
+.purpose {
+    background: #eaf5fc;
+    border-left: 4px solid var(--primary-color);
+    padding: 15px;
+    margin-top: 20px;
+    font-size: 0.95rem;
+    border-radius: 4px;
+}
+
+.purpose strong {
+    color: var(--primary-color-dark);
+}
+
+/* --- 脚注样式 --- */
+footer {
+    background: var(--dark-color);
+    color: #aaa;
+    text-align: center;
+    padding: 30px 0;
+}
+</style>
+</head>
+<body>
+
+<!-- 头部和导航栏 -->
+<header>
+    <div class="container">
+        <h1>融城汇</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">首页</a></li>
+                <li><a href="#team">团队介绍</a></li>
+                <li><a href="#proposal">项目提案</a></li>
+                <li><a href="#data-collection">数据收集</a></li>
+                <li><a href="#survey-questions">问卷详情</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- 主体内容区 -->
+<main>
+    <!-- 首页区块 -->
+    <section id="home">
+        <h1>星火创新小组</h1>
+        <p>我们致力于通过技术弥合数字鸿沟，让每一位城市居民都能平等、便捷地享受信息时代的红利。</p>
+        <a href="#proposal" class="btn">了解项目详情</a>
+    </section>
+
+    <!-- 团队介绍区块 -->
+    <section id="team">
+        <div class="container">
+            <h2>团队介绍</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <h3>辛煜</h3>
+                    <p>项目经理 (PM)，负责项目规划与协调、问卷设计与数据整理。</p>
+                </div>
+                <div class="team-member">
+                    <h3>闫文彪</h3>
+                    <p>用户体验设计师 (UX Designer)，负责网站设计与搭建、原型制作。</p>
+                </div>
+                <div class="team-member">
+                    <h3>杨昊霖</h3>
+                    <p>用户研究员 (User Researcher)，负责访谈执行与记录稿整理。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 项目提案区块 -->
+    <section id="proposal">
+        <div class="container">
+            <h2>项目提案</h2>
+            <h3>项目名称： “融城汇”</h3>
+            <p>
+                <strong>项目简介：</strong>
+                本项目旨在设计一款智能手机App，为城市中的边缘化群体（如独居老人、外来务工人员、少数民族、残障人士等）提供一个集中、易用的信息与服务平台。该App将整合社区服务、医疗资源，提供多语言支持和个性化提醒功能，以解决他们面临的信息不对称、沟通障碍和紧急求助渠道缺失等问题，提升他们的生活质量和社会融入感。
+            </p>
+            <p>
+                <strong>目标用户：</strong>
+                城市中因年龄、语言、技能或身体原因而在信息获取和数字服务使用上存在困难的群体。
+            </p>
+            <h3>核心功能</h3>
+            <ul>
+                <li><strong>信息中心：</strong> 聚合社区通知、福利政策、健康讲座等官方信息，并提供语音播报功能。</li>
+                <li><strong>服务导航：</strong> 提供无障碍优化的地图，标注医院、社区食堂等便民服务点。</li>
+                <li><strong>沟通无碍：</strong> 内置语音翻译工具，辅助用户与医生、社区工作人员等进行沟通。</li>
+                <li><strong>智能提醒：</strong> 个性化设置吃药、复诊、缴费等重要事项的提醒。</li>
+                <li><strong>一键求助：</strong> 紧急情况下快速联系家人、社区网格员或急救中心。</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 数据收集计划区块 -->
+    <section id="data-collection">
+        <div class="container">
+            <h2>数据收集计划</h2>
+            <h3>1. 半结构化访谈</h3>
+            <p>
+                <strong>目的：</strong> 深入、定性地了解目标用户在日常生活中获取信息、服务和支持时的具体经历、感受、挑战和应对策略。我们希望听到他们的故事，而不仅仅是简单的答案。
+            </p>
+            <p>
+                <strong>方法：</strong> 邀请4位来自不同背景（独居老人、外来务工人员、少数民族、残障人士）的目标用户进行20-30分钟的一对一访谈。访谈过程将围绕日常生活习惯、信息获取渠道、服务使用经历以及紧急情况应对等主题展开，并根据用户的回答进行灵活追问，以挖掘深层需求和痛点。
+            </p>
+            
+            <h3>2. 问卷调查</h3>
+            <p>
+                <strong>目的：</strong> 定量地收集用户基本信息、行为频率和态度偏好，以验证访谈中得到的初步洞见，并为用户画像提供数据支持。
+            </p>
+            <p>
+                <strong>方法：</strong> 设计一份包含约20个问题的在线问卷，涵盖用户背景、数字技能、服务需求、信任顾虑等多个维度。通过线上社区和线下走访等方式，向10位以上的潜在用户分发并回收问卷。数据将用于分析用户群体的普遍规律和核心需求。
+            </p>
+        </div>
+    </section>
+    
+    <!-- 问卷详情区块 -->
+    <section id="survey-questions">
+        <div class="container">
+            <h2>调查问卷详情</h2>
+
+            <h3>第一部分：用户背景画像 (User Profile)</h3>
+            
+            <div class="question-block">
+                <h4>1. 您的年龄是？<span class="meta">[单选题]</span></h4>
+                <ul>
+                    <li>A. 40岁以下</li>
+                    <li>B. 41-55岁</li>
+                    <li>C. 56-70岁</li>
+                    <li>D. 71岁及以上</li>
+                </ul>
+                <div class="purpose"><strong>目的：</strong>了解用户的年龄分布，这是划分用户群体（如青年务工者 vs. 老年人）的最基本维度，不同年龄段的需求和数字技能差异巨大。</div>
+            </div>
+
+            <div class="question-block">
+                <h4>2. 您目前的身份是？<span class="meta">[多选题，可选多项]</span></h4>
+                <ul>
+                    <li>A. 退休人员/独居老人</li>
+                    <li>B. 外来务工人员</li>
+                    <li>C. 全职/兼职工作者</li>
+                    <li>D. 残障人士</li>
+                    <li>E. 少数民族</li>
+                    <li>F. 其他</li>
+                </ul>
+                <div class="purpose"><strong>目的：</strong>精准定位项目报告中提到的核心“边缘化群体”，了解样本中各类用户的占比，为后续交叉分析提供基础。</div>
+            </div>
+            
+            <div class="question-block">
+                <h4>3. 您在这座城市生活了多久？<span class="meta">[单选题]</span></h4>
+                <ul>
+                    <li>A. 不到1年</li>
+                    <li>B. 1-5年</li>
+                    <li>C. 5年以上</li>
+                </ul>
+                <div class="purpose"><strong>目的：</strong>衡量用户的社区融入程度。刚来城市的用户可能更需要基础信息和社交支持，而长期居住的用户可能有更深层次的服务需求。</div>
+            </div>
+            
+            <div class="question-block">
+                <h4>4. 您日常交流主要使用的语言是？<span class="meta">[单选题]</span></h4>
+                <ul>
+                    <li>A. 普通话</li>
+                    <li>B. 本地方言</li>
+                    <li>C. 家乡方言/少数民族语言</li>
+                    <li>D. 其他</li>
+                </ul>
+                <div class="purpose"><strong>目的：</strong>直接量化“语言支持”功能的需求强度。如果选择C的比例很高，说明多语言翻译是App的核心功能之一。</div>
+            </div>
+
+            <h3>第二部分：数字技能与信息渠道</h3>
+            
+            <div class="question-block">
+                <h4>1. 您使用智能手机的频率是？<span class="meta">[单选题]</span></h4>
+                <ul>
+                    <li>A. 每天都用，离不开</li>
+                    <li>B. 每天会用，但主要用几个功能</li>
+                    <li>C. 偶尔用一下</li>
+                    <li>D. 几乎不用/没有智能手机</li>
+                </ul>
+                <div class="purpose"><strong>目的：</strong>评估产品的潜在用户基数和用户的手机依赖度。如果大部分人选A/B，说明以手机App为载体是可行的。</div>
+            </div>
+
+            <div class="question-block">
+                <h4>2. 您通常使用手机App完成以下哪些事情？<span class="meta">[多选题]</span></h4>
+                <ul>
+                    <li>A. 与家人朋友聊天（如微信）</li>
+                    <li>B. 看新闻/短视频</li>
+                    <li>C. 网上购物/支付</li>
+                    <li>D. 导航/查地图</li>
+                    <li>E. 网上挂号/政务办事</li>
+                    <li>F. 我很少使用App</li>
+                </ul>
+                <div class="purpose"><strong>目的：</strong>了解用户的数字行为广度。如果多数人只用A/B，说明我们的App设计必须极其简单，甚至可以考虑集成在微信小程序中。</div>
+            </div>
+
+            <div class="question-block">
+                <h4>3. 当您需要安装和学习一个新手机App时，您感觉？<span class="meta">[单选题]</span></h4>
+                <ul>
+                    <li>(1) 非常困难</li>
+                    <li>(2) 有些困难</li>
+                    <li>(3) 一般</li>
+                    <li>(4) 比较容易</li>
+                    <li>(5) 非常容易</li>
+                </ul>
+                <div class="purpose"><strong>目的：</strong>量化用户学习新应用的门槛。分数越低，说明我们的App需要越强的引导和极简的设计。</div>
+            </div>
+            
+            <div class="question-block">
+                <h4>4. 在过去一年中，您通过以下哪些渠道获取社区福利或活动信息？<span class="meta">[多选题]</span></h4>
+                <ul>
+                    <li>A. 社区公告栏</li>
+                    <li>B. 邻居/朋友告知</li>
+                    <li>C. 社区工作人员通知</li>
+                    <li>D. 电视/报纸</li>
+                    <li>E. 手机App/微信群</li>
+                    <li>F. 几乎没获取过此类信息</li>
+                </ul>
+                <div class="purpose"><strong>目的：</strong>评估当前信息渠道的覆盖情况。如果传统渠道（A/B/C）占比高，说明App有机会成为一个高效的线上整合渠道。如果F占比高，说明存在严重的信息鸿沟。</div>
+            </div>
+            
+            <h3>第三部分：服务需求与核心痛点</h3>
+            
+            <div class="question-block">
+                <h4>1. 请对以下服务的获取难度进行打分 (1=非常容易, 5=非常困难)<span class="meta">[矩阵量表]</span></h4>
+                <ul>
+                    <li>去医院看病挂号： (1) (2) (3) (4) (5)</li>
+                    <li>申请政府补贴/福利： (1) (2) (3) (4) (5)</li>
+                    <li>寻找法律/心理咨询： (1) (2) (3) (4) (5)</li>
+                    <li>找到社区志愿服务： (1) (2) (3) (4) (5)</li>
+                </ul>
+                <div class="purpose"><strong>目的：</strong>量化不同服务领域的痛点强度，帮助确定App应优先整合哪些服务。得分最高的领域是设计的重点。</div>
+            </div>
+            
+            <div class="question-block">
+                <h4>2. 您在办事或看病时，最常遇到的障碍是什么？<span class="meta">[多选题]</span></h4>
+                <ul>
+                    <li>A. 流程太复杂，不知道怎么办</li>
+                    <li>B. 语言不通，沟通困难</li>
+                    <li>C. 排队时间太长</li>
+                    <li>D. 找不到正确的地方/窗口</li>
+                    <li>E. 没有遇到过明显障碍</li>
+                </ul>
+                <div class="purpose"><strong>目的：</strong>从用户视角识别服务流程中的核心障碍，直接对应App的功能设计（如流程指引、语言翻译、在线预约等）。</div>
+            </div>
+
+            <div class="question-block">
+                <h4>3. 您是否需要以下提醒服务？<span class="meta">[多选题]</span></h4>
+                <ul>
+                    <li>A. 按时吃药提醒</li>
+                    <li>B. 医院复诊/体检提醒</li>
+                    <li>C. 政府补贴申请截止日期提醒</li>
+                    <li>D. 社区活动提醒</li>
+                    <li>E. 我不需要这些提醒</li>
+                </ul>
+                <div class="purpose"><strong>目的：</strong>具体验证“个性化提醒”功能下不同子功能的需求量，帮助确定功能优先级。</div>
+            </div>
+
+            <div class="question-block">
+                <h4>4. 对您来说，以下哪项服务是您最希望通过手机App一键获得的？<span class="meta">[单选题]</span></h4>
+                <ul>
+                    <li>A. 一键查看附近的社区服务点（食堂、医疗站）</li>
+                    <li>B. 提供语音翻译，方便和医生、工作人员沟通</li>
+                    <li>C. 自动提醒吃药、复诊、交费等</li>
+                    <li>D. 一键紧急求助按钮</li>
+                    <li>E. 其他</li>
+                </ul>
+                <div class="purpose"><strong>目的：</strong>强制用户做出选择，找出他们心中“最迫切”的需求，这是确定App核心价值的关键问题。</div>
+            </div>
+            
+            <h3>第四部分：信任、意愿与顾虑</h3>
+
+            <div class="question-block">
+                <h4>1. 如果遇到紧急情况，您更倾向于使用哪种方式求助？<span class="meta">[单选题]</span></h4>
+                <ul>
+                    <li>A. 给家人/朋友打电话</li>
+                    <li>B. 拨打110/120</li>
+                    <li>C. 向邻居/社区求助</li>
+                    <li>D. 使用手机App上的一键求助</li>
+                </ul>
+                <div class="purpose"><strong>目的：</strong>了解App在紧急求助场景下的竞争地位。如果D选项比例很低，说明需要加强对该功能可靠性和有效性的宣传与设计。</div>
+            </div>
+
+            <div class="question-block">
+                <h4>2. 您有多大意愿在一个由政府或社区官方认证的App上寻求帮助或咨询？<span class="meta">[单选题]</span></h4>
+                <ul>
+                    <li>(1) 完全不愿意</li>
+                    <li>(2) 不太愿意</li>
+                    <li>(3) 不确定</li>
+                    <li>(4) 比较愿意</li>
+                    <li>(5) 非常愿意</li>
+                </ul>
+                <div class="purpose"><strong>目的：</strong>衡量“官方背书”对建立用户信任的重要性。如果分数高，说明与政府/社区合作是产品推广的关键策略。</div>
+            </div>
+            
+            <div class="question-block">
+                <h4>3. 对于一个能提供多种帮助的手机App，您最关心的是？<span class="meta">[单选题]</span></h4>
+                <ul>
+                    <li>A. 操作是否足够简单</li>
+                    <li>B. 信息是否真实可靠</li>
+                    <li>C. 能否保护我的个人隐私</li>
+                    <li>D. 是否完全免费</li>
+                </ul>
+                <div class="purpose"><strong>目的：</strong>了解用户的核心价值判断标准。这直接影响产品的设计哲学：是优先易用性、内容审核、安全保护还是商业模式。</div>
+            </div>
+            
+            <div class="question-block">
+                <h4>4. 您是否愿意通过App与社区里的邻居进行线上互助（如帮忙取快递、分享物品）？<span class="meta">[单选题]</span></h4>
+                <ul>
+                    <li>A. 非常愿意，很有用</li>
+                    <li>B. 可以试试看</li>
+                    <li>C. 不太愿意，觉得麻烦</li>
+                    <li>D. 完全不愿意，担心安全</li>
+                </ul>
+                <div class="purpose"><strong>目的：</strong>评估社区社交和P2P互助功能的可行性与用户接受度。</div>
+            </div>
+
+            <div class="question-block">
+                <h4>5. 在什么情况下，您愿意授权App使用您的位置信息？<span class="meta">[多选题]</span></h4>
+                <ul>
+                    <li>A. 查找附近的医院/服务点时</li>
+                    <li>B. 使用紧急求助功能时</li>
+                    <li>C. 接收社区周边活动通知时</li>
+                    <li>D. 我不愿意在任何情况下提供位置</li>
+                </ul>
+                <div class="purpose"><strong>目的：</strong>探究用户对隐私（特别是位置信息）的敏感度，为功能设计中的权限申请和隐私政策说明提供依据。</div>
+            </div>
+
+            <div class="question-block">
+                <h4>6. 您认为什么样的设计能让您更愿意使用一个App？<span class="meta">[多选题]</span></h4>
+                <ul>
+                    <li>A. 字号足够大，看得清楚</li>
+                    <li>B. 主要功能用大图标展示，容易点</li>
+                    <li>C. 支持方言或语音操作</li>
+                    <li>D. 页面颜色简单，不花哨</li>
+                </ul>
+                <div class="purpose"><strong>目的：</strong>直接收集用户对UI/UX的偏好，为无障碍设计提供具体指导。</div>
+            </div>
+
+             <div class="question-block">
+                <h4>7. 您期望这款App主要由谁来运营和管理？<span class="meta">[单选题]</span></h4>
+                <ul>
+                    <li>A. 政府部门</li>
+                    <li>B. 社区居委会</li>
+                    <li>C. 可靠的商业公司</li>
+                    <li>D. 志愿者组织</li>
+                </ul>
+                <div class="purpose"><strong>目的：</strong>进一步探究信任的来源，运营方的性质会直接影响用户的信任感和使用意愿。</div>
+            </div>
+
+            <div class="question-block">
+                <h4>8. 关于我们设想的这款App，您还有什么其他的建议或担忧吗？<span class="meta">[开放式问题]</span></h4>
+                <div class="purpose"><strong>目的：</strong>提供一个开放的渠道，捕捉问卷中未能覆盖到的其他重要观点、潜在需求或用户顾虑。</div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<!-- 脚注 -->
+<footer>
+    <div class="container">
+        <p>&copy; 2025 星火创新小组 - 人机交互实验课作业</p>
+    </div>
+</footer>
+</body>
+</html>
