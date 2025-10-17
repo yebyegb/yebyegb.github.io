@@ -9,13 +9,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-    --primary-color: #3498db;
-    --primary-color-dark: #2980b9;
-    --dark-color: #2c3e50;
-    --light-color: #fdfdfd;
-    --grey-color: #f7f9fc;
-    --text-color: #34495e;
-    --shadow: 0 5px 15px rgba(0,0,0,0.1);
+    /* 调整后的柔和色彩方案 */
+    --primary-color: #6a7a90; /* 沉稳蓝灰，替代亮蓝色 */
+    --primary-color-dark: #586576; /* 更深的蓝灰 */
+    --dark-color: #333333; /* 纯深灰，用于头部和重要标题 */
+    --light-color: #ffffff; /* 纯白 */
+    --grey-color: #f2f2f2; /* 中性浅灰 */
+    --text-color: #555555; /* 中性深灰，提高可读性 */
+    --shadow: 0 5px 15px rgba(0,0,0,0.08); /* 略微减弱阴影强度 */
 }
 
 /* --- 全局样式 --- */
@@ -136,6 +137,7 @@ section h3 {
 
 /* --- 特定区块样式 --- */
 #home {
+    /* 使用新的主色系渐变，保持低饱和度 */
     background-image: linear-gradient(to right, var(--primary-color), var(--primary-color-dark));
     color: #fff;
     text-align: center;
@@ -633,4 +635,5 @@ footer {
     </div>
 </footer>
 </body>
+
 </html>
